@@ -1,13 +1,13 @@
 <section class="recipe-list">
   <h2 class="visually-hidden">List of recipes</h2>
-  <button type="button">New Recipe</button>
+  <button class="button" type="button">New Recipe</button>
   <ul class="recipes">
     <li *ngFor="let recipe of recipes">
       <a href="#">
         <h3>{{ recipe.name }}</h3>
         <p>{{ recipe.description }}</p>
         <img
-          [src]="'/assets/images/recipes/' + recipe.image"
+          [src]="'/assets/images/recipes/' + recipe.image + '-xs.jpg'"
           [alt]="recipe.name"
         >
       </a>
