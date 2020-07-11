@@ -1,0 +1,14 @@
+.recipes {
+  display: flex;
+}
+
+.recipe-list {
+  flex-shrink: 0;
+  width: 400px;
+  margin-right: 60px;
+}
+
+.recipe-detail {
+  flex-shrink: 0;
+  flex-grow: 1;
+}
