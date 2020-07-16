@@ -1,3 +1,9 @@
+.main {
+  background-color: var(--color-basic-white);
+  border-radius: var(--border-radius-number);
+  margin-top: -25px;
+}
+
 .container {
   padding-top: 20px;
   padding-bottom: 20px;
