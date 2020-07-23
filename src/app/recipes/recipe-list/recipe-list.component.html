@@ -3,14 +3,7 @@
   <button class="button" type="button">New Recipe</button>
   <ul class="recipes">
     <li *ngFor="let recipe of recipes">
-      <a href="#">
-        <h3>{{ recipe.name }}</h3>
-        <p>{{ recipe.description }}</p>
-        <img
-          [src]="'/assets/images/recipes/' + recipe.image + '-xs.jpg'"
-          [alt]="recipe.name"
-        >
-      </a>
+      <app-recipe-item [recipe]="recipe"></app-recipe-item>
     </li>
   </ul>
   <app-recipe-item></app-recipe-item>

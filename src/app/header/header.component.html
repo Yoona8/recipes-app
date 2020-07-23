@@ -1,14 +1,18 @@
 <header class="header">
   <nav class="container">
     <a class="logo" href="#">
-      <img width="60" height="60" src="/assets/images/rb-logo.png" alt="Recipe Book Logo">
+      <img
+        width="60" height="60"
+        src="/assets/images/rb-logo.png"
+        alt="Recipe Book Logo"
+      >
     </a>
     <ul class="main-menu">
       <li>
-        <a href="#">Recipes</a>
+        <a href="#" (click)="onSelect('recipes')">Recipes</a>
       </li>
       <li>
-        <a href="#">Shopping List</a>
+        <a href="#" (click)="onSelect('shopping')">Shopping List</a>
       </li>
     </ul>
     <div class="user-menu-container">
