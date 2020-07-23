@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Recipe } from '../recipe.model';
 // @ts-ignore
 import * as recipesData from '../../../mocks/recipes.json';
@@ -8,10 +8,11 @@ import * as recipesData from '../../../mocks/recipes.json';
   templateUrl: './recipe-list.component.html',
   styleUrls: ['./recipe-list.component.css']
 })
-export class RecipeListComponent implements OnInit {
+export class RecipeListComponent {
   public recipes: Recipe[] = recipesData.default;
+  @Output() recipeSelected = new EventEmitter<Recipe>();
 
-  constructor() {}
-
-  ngOnInit(): void {}
+  onRecipeSelected(recipe: Recipe) {
+    this.recipeSelected.emit(recipe);
+  }
 }

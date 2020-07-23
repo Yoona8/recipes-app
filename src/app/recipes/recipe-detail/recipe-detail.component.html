@@ -1,6 +1,9 @@
 <section class="recipe-detail">
-  <img src="/assets/images/recipes/falafel.jpg" alt="Falafel">
-  <h1>Recipe Name</h1>
+  <img
+    [src]="'/assets/images/recipes/' + recipe.image + '.jpg'"
+    [alt]="recipe.name"
+  >
+  <h1>{{ recipe.name }}</h1>
   <div class="user-menu-container">
     <button class="button toggle" type="button">Manage</button>
     <ul class="user-menu">
@@ -10,7 +13,7 @@
     </ul>
   </div>
   <div class="description">
-    <p>Description</p>
+    <p>{{ recipe.description }}</p>
   </div>
   <div class="ingredients">
     Ingredients

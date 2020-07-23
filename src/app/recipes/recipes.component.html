@@ -1,8 +1,14 @@
 <div class="recipes">
   <div class="recipe-list">
-    <app-recipe-list></app-recipe-list>
+    <app-recipe-list (recipeSelected)="onRecipeSelected($event)"></app-recipe-list>
   </div>
   <div class="recipe-detail">
-    <app-recipe-detail></app-recipe-detail>
+    <app-recipe-detail
+      *ngIf="currentRecipe; else noRecipeSelected"
+      [recipe]="currentRecipe"
+    ></app-recipe-detail>
+    <ng-template #noRecipeSelected>
+      <p>Please select a recipe.</p>
+    </ng-template>
   </div>
 </div>

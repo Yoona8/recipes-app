@@ -5,7 +5,10 @@
   </p>
   <ul class="recipes">
     <li *ngFor="let recipeItem of recipes">
-      <app-recipe-item [recipe]="recipeItem"></app-recipe-item>
+      <app-recipe-item
+        [recipe]="recipeItem"
+        (recipeSelected)="onRecipeSelected(recipeItem)"
+      ></app-recipe-item>
     </li>
   </ul>
 </section>
