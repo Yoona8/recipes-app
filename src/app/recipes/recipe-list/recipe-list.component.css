@@ -1,0 +1,14 @@
+.recipes {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.add-new {
+  margin: 0 0 20px;
+}
+
+.recipes li {
+  display: block;
+  margin-bottom: 12px;
+}

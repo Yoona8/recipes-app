@@ -7,6 +7,7 @@
   --color-error: #D8315A;
   --color-error-light: #EB96AB;
   --border-radius-number: 20px;
+  --transition-params: 0.2s ease;
 }
 
 html,
@@ -23,10 +24,20 @@ body {
   color: var(--color-basic-black);
 }
 
+a {
+  color: inherit;
+}
+
 .container {
   width: 1100px;
   margin: 0 auto;
   padding: 0 20px;
+}
+
+.title {
+  margin: 0 0 10px;
+  font-weight: 700;
+  font-size: 20px;
 }
 
 .visually-hidden:not(:focus):not(:active),

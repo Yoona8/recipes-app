@@ -1,8 +1,13 @@
-<a href="#">
-  <h3>{{ recipe.name }}</h3>
-  <p>{{ recipe.description }}</p>
-  <img
-    [src]="'/assets/images/recipes/' + recipe.image + '-xs.jpg'"
-    [alt]="recipe.name"
-  >
+<a class="recipe-item" href="#">
+  <div class="image-wrapper">
+    <img
+      class="image"
+      [src]="'/assets/images/recipes/' + recipe.image + '-xs.jpg'"
+      [alt]="recipe.name"
+    >
+  </div>
+  <div class="text-wrapper">
+    <h3 class="title">{{ recipe.name }}</h3>
+    <p class="description">{{ recipe.description }}</p>
+  </div>
 </a>
