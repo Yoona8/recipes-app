@@ -2,7 +2,10 @@
   --color-basic-black: #000000;
   --color-basic-white: #ffffff;
   --color-accent-dark: #218B82;
-  --color-accent-light: #98d4bb;
+  --color-accent-light: #98D4BB;
+  --color-neutral-light: #E5DBD9;
+  --color-error: #D8315A;
+  --color-error-light: #EB96AB;
   --border-radius-number: 20px;
 }
 
@@ -63,4 +66,18 @@ input[type="radio"].visually-hidden {
   box-shadow:
     0 0 0 3px var(--color-basic-white),
     0 0 0 6px var(--color-accent-dark);
+}
+
+.button--danger {
+  background-color: var(--color-error);
+}
+
+.button--danger:hover {
+  background-color: var(--color-error-light);
+}
+
+.button--danger:focus {
+  box-shadow:
+    0 0 0 3px var(--color-basic-white),
+    0 0 0 6px var(--color-error);
 }
