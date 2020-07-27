@@ -3,7 +3,7 @@
     [src]="'/assets/images/recipes/' + recipe.image + '.jpg'"
     [alt]="recipe.name"
   >
-  <h1>{{ recipe.name }}</h1>
+  <h1 class="title">{{ recipe.name }}</h1>
   <div class="user-menu-container">
     <button class="button toggle" type="button">Manage</button>
     <ul class="user-menu">
@@ -16,6 +16,6 @@
     <p>{{ recipe.description }}</p>
   </div>
   <div class="ingredients">
-    Ingredients
+    <h2 class="title">Ingredients</h2>
   </div>
 </section>

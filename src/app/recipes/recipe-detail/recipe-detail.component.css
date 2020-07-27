@@ -1,0 +1,11 @@
+.title {
+  font-size: 24px;
+}
+
+.description p {
+  margin: 0 0 5px;
+}
+
+.ingredients .title {
+  font-size: 20px;
+}
