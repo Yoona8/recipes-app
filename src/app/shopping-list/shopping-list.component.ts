@@ -10,4 +10,8 @@ import * as ingredientsData from '../../mocks/ingredients.json';
 })
 export class ShoppingListComponent {
   public ingredients: Ingredient[] = ingredientsData.default;
+
+  onIngredientAdded(ingredient): void {
+    this.ingredients.push(ingredient);
+  }
 }
