@@ -1,17 +1,31 @@
 <section class="shopping-edit">
   <form>
-    <ul>
-      <li>
+    <ul class="fields">
+      <li class="input">
         <label for="name">Name</label>
-        <input id="name" type="text">
+        <input
+          id="name"
+          type="text"
+          #nameInput
+        >
       </li>
-      <li>
+      <li class="input">
         <label for="amount">Amount</label>
-        <input id="amount" type="number">
+        <input
+          id="amount"
+          type="number"
+          #amountInput
+        >
       </li>
     </ul>
     <p class="controls">
-      <button class="button" type="submit">Add</button>
+      <button
+        class="button"
+        type="submit"
+        (click)="onAddIngredient($event)"
+      >
+        Add
+      </button>
       <button class="button button--danger" type="button">Delete</button>
       <button class="button" type="reset">Clear</button>
     </p>

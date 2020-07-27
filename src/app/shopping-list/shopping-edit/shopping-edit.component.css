@@ -1,3 +1,15 @@
+.fields {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.input {
+  width: 300px;
+  margin-right: 15px;
+}
+
 .controls {
   margin: 0;
 }
