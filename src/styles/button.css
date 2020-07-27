@@ -1,0 +1,37 @@
+.button {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0;
+  padding: 10px 20px;
+  font: inherit;
+  color: var(--color-basic-white);
+  background-color: var(--color-accent-dark);
+  border: 0;
+  border-radius: var(--border-radius-number);
+  cursor: pointer;
+  outline: none;
+}
+
+.button:hover {
+  background-color: var(--color-accent-light);
+}
+
+.button:focus {
+  box-shadow:
+    0 0 0 3px var(--color-basic-white),
+    0 0 0 6px var(--color-accent-dark);
+}
+
+.button--danger {
+  background-color: var(--color-error);
+}
+
+.button--danger:hover {
+  background-color: var(--color-error-light);
+}
+
+.button--danger:focus {
+  box-shadow:
+    0 0 0 3px var(--color-basic-white),
+    0 0 0 6px var(--color-error);
+}

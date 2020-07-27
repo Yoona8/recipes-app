@@ -7,6 +7,7 @@
   --color-error: #D8315A;
   --color-error-light: #EB96AB;
   --border-radius-number: 20px;
+  --border-radius-small: 5px;
   --transition-params: 0.2s ease;
 }
 
@@ -55,40 +56,14 @@ input[type="radio"].visually-hidden {
   overflow: hidden;
 }
 
-.button {
-  display: inline-block;
-  vertical-align: middle;
-  margin: 0;
-  padding: 10px 20px;
-  font: inherit;
-  color: var(--color-basic-white);
-  background-color: var(--color-accent-dark);
-  border: 0;
-  border-radius: var(--border-radius-number);
-  cursor: pointer;
-  outline: none;
-}
-
-.button:hover {
-  background-color: var(--color-accent-light);
-}
-
-.button:focus {
-  box-shadow:
-    0 0 0 3px var(--color-basic-white),
-    0 0 0 6px var(--color-accent-dark);
-}
-
-.button--danger {
-  background-color: var(--color-error);
-}
-
-.button--danger:hover {
-  background-color: var(--color-error-light);
-}
-
-.button--danger:focus {
-  box-shadow:
-    0 0 0 3px var(--color-basic-white),
-    0 0 0 6px var(--color-error);
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  transition: background-color 5000s ease-in-out 0s;
 }
