@@ -1,12 +1,14 @@
 <section class="recipe-detail">
-  <img
-    [src]="'/assets/images/recipes/' + recipe.image + '.jpg'"
-    [alt]="recipe.name"
-  >
+  <p class="image-wrapper">
+    <img
+      [src]="'/assets/images/recipes/' + recipe.image + '.jpg'"
+      [alt]="recipe.name"
+    >
+  </p>
   <h1 class="title">{{ recipe.name }}</h1>
-  <div class="user-menu-container">
-    <button class="button toggle" type="button">Manage</button>
-    <ul class="user-menu">
+  <div class="user-menu-container dropdown" appDropdown>
+    <button class="toggle dropdown__toggle" type="button">Manage</button>
+    <ul class="user-menu dropdown__menu">
       <li><a href="#">To Shopping List</a></li>
       <li><a href="#">Edit Recipe</a></li>
       <li><a href="#">Delete Recipe</a></li>

@@ -17,6 +17,9 @@
 }
 
 .image-wrapper {
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
   margin-right: 12px;
   border-radius: 50%;
   overflow: hidden;

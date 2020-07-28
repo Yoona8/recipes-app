@@ -9,7 +9,7 @@ export class AppComponent implements OnInit {
   public currentFeature: string;
 
   ngOnInit(): void {
-    this.currentFeature = 'shopping';
+    this.currentFeature = 'recipes';
   }
 
   onFeatureSelected(feature: string) {
