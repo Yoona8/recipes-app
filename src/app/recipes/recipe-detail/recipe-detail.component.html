@@ -9,7 +9,7 @@
   <div class="user-menu-container dropdown" appDropdown>
     <button class="toggle dropdown__toggle" type="button">Manage</button>
     <ul class="user-menu dropdown__menu">
-      <li><a href="#">To Shopping List</a></li>
+      <li><a href="#" (click)="onAddToShoppingListClick($event)">To Shopping List</a></li>
       <li><a href="#">Edit Recipe</a></li>
       <li><a href="#">Delete Recipe</a></li>
     </ul>
@@ -19,5 +19,10 @@
   </div>
   <div class="ingredients">
     <h2 class="title">Ingredients</h2>
+    <ul>
+      <li *ngFor="let ingredient of recipe.ingredients">
+        {{ ingredient.name }} [{{ ingredient.amount }}]
+      </li>
+    </ul>
   </div>
 </section>
