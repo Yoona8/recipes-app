@@ -12,8 +12,14 @@
 }
 
 .recipe-item:hover,
-.recipe-item:focus {
+.recipe-item:focus,
+.recipe-item--current {
   border-color: var(--color-accent-dark);
+}
+
+.recipe-item--current {
+  color: var(--color-basic-white);
+  background-color: var(--color-accent-dark);
 }
 
 .image-wrapper {

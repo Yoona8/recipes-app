@@ -4,9 +4,10 @@
     <button class="button" type="button">New Recipe</button>
   </p>
   <ul class="recipes">
-    <li *ngFor="let recipeItem of recipes">
+    <li *ngFor="let recipeItem of recipes; let i = index">
       <app-recipe-item
         [recipe]="recipeItem"
+        [recipeId]="i"
       ></app-recipe-item>
     </li>
   </ul>

@@ -1,4 +1,8 @@
-<a class="recipe-item" href="#" (click)="onRecipeClick($event)">
+<a
+  class="recipe-item"
+  [routerLink]="[recipeId]"
+  routerLinkActive="recipe-item--current"
+>
   <div class="image-wrapper">
     <img
       class="image"
