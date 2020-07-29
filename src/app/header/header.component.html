@@ -8,11 +8,11 @@
       >
     </a>
     <ul class="main-menu">
-      <li>
-        <a href="#" (click)="onSelect('recipes')">Recipes</a>
+      <li routerLinkActive="current">
+        <a routerLink="/recipes">Recipes</a>
       </li>
-      <li>
-        <a href="#" (click)="onSelect('shopping')">Shopping List</a>
+      <li routerLinkActive="current">
+        <a routerLink="/shopping-list">Shopping List</a>
       </li>
     </ul>
     <div class="user-menu-container dropdown" appDropdown>

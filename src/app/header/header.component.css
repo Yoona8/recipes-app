@@ -30,6 +30,10 @@ a {
   margin-right: 20px;
 }
 
+.main-menu .current {
+  color: var(--color-accent-light);
+}
+
 .main-menu a {
   text-decoration: none;
 }
