@@ -24,6 +24,10 @@ export class RecipeDetailComponent implements OnInit {
     });
   }
 
+  get recipeId(): number {
+    return this._id;
+  }
+
   onAddToShoppingListClick(evt) {
     evt.preventDefault();
     this.recipesService

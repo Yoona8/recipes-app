@@ -9,8 +9,10 @@
   <div class="user-menu-container dropdown" appDropdown>
     <button class="toggle dropdown__toggle" type="button">Manage</button>
     <ul class="user-menu dropdown__menu">
-      <li><a href="#" (click)="onAddToShoppingListClick($event)">To Shopping List</a></li>
-      <li><a href="#">Edit Recipe</a></li>
+      <li><a href="#" (click)="onAddToShoppingListClick($event)">
+        To Shopping List
+      </a></li>
+      <li><a routerLink="edit">Edit Recipe</a></li>
       <li><a href="#">Delete Recipe</a></li>
     </ul>
   </div>

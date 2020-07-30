@@ -5,6 +5,7 @@
   padding: 10px 20px;
   font: inherit;
   color: var(--color-basic-white);
+  text-decoration: none;
   background-color: var(--color-accent-dark);
   border: 0;
   border-radius: var(--border-radius-number);
