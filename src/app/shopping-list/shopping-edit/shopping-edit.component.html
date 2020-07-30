@@ -1,20 +1,30 @@
 <section class="shopping-edit">
-  <form>
+  <form
+    (ngSubmit)="onAddIngredient(shoppingEditForm)"
+    #shoppingEditForm="ngForm"
+  >
     <ul class="fields">
       <li class="input">
-        <label for="name">Name</label>
+        <label for="shopping-list-name">Name</label>
         <input
-          id="name"
+          id="shopping-list-name"
           type="text"
-          #nameInput
+          name="name"
+          ngModel
+          required
         >
       </li>
       <li class="input">
-        <label for="amount">Amount</label>
+        <label for="shopping-list-amount">Amount</label>
         <input
-          id="amount"
+          id="shopping-list-amount"
           type="number"
-          #amountInput
+          name="amount"
+          min="1"
+          max="1000"
+          pattern="^[1-9]+[0-9]*"
+          ngModel
+          required
         >
       </li>
     </ul>
@@ -22,10 +32,8 @@
       <button
         class="button"
         type="submit"
-        (click)="onAddIngredient($event)"
-      >
-        Add
-      </button>
+        [disabled]="!shoppingEditForm.valid"
+      >Add</button>
       <button class="button button--danger" type="button">Delete</button>
       <button class="button" type="reset">Clear</button>
     </p>

@@ -9,25 +9,32 @@
   background-color: var(--color-accent-dark);
   border: 0;
   border-radius: var(--border-radius-number);
-  cursor: pointer;
   outline: none;
 }
 
-.button:hover {
+.button:not(:disabled) {
+  cursor: pointer;
+}
+
+.button:not(:disabled):hover {
   background-color: var(--color-accent-light);
 }
 
-.button:focus {
+.button:not(:disabled):focus {
   box-shadow:
     0 0 0 3px var(--color-basic-white),
     0 0 0 6px var(--color-accent-dark);
+}
+
+.button:disabled {
+  background-color: var(--color-neutral);
 }
 
 .button--danger {
   background-color: var(--color-error);
 }
 
-.button--danger:hover {
+.button--danger:not(:disabled):hover {
   background-color: var(--color-error-light);
 }
 
