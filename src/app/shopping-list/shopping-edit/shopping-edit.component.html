@@ -36,8 +36,19 @@
       >
         {{ isEdit ? 'Save' : 'Add' }}
       </button>
-      <button class="button button--danger" type="button">Delete</button>
-      <button class="button" type="reset">Clear</button>
+      <button
+        class="button button--danger"
+        type="button"
+        *ngIf="isEdit"
+        (click)="onDeleteClick()"
+      >Delete</button>
+      <button
+        class="button"
+        type="reset"
+        (click)="onClearClick()"
+      >
+        Clear
+      </button>
     </p>
   </form>
 </section>
