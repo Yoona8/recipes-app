@@ -1,0 +1,32 @@
+.ingredients {
+  max-width: 500px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ingredients a {
+  position: relative;
+  display: block;
+  margin-bottom: 5px;
+  padding: 10px 15px 10px 45px;
+  text-decoration: none;
+  border: 1px solid var(--color-neutral-light);
+  border-radius: var(--border-radius-small);
+  outline: none;
+}
+
+.ingredients a:hover,
+.ingredients a:focus {
+  border-color: var(--color-accent-dark);
+}
+
+.ingredients a::before {
+  content: '';
+  position: absolute;
+  left: 15px;
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  border-radius: 50%;
+}
