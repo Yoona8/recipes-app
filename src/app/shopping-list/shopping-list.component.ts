@@ -29,4 +29,9 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   get ingredients(): Ingredient[] {
     return this._ingredients;
   }
+
+  onIngredientClick(evt, id) {
+    evt.preventDefault();
+    this.shoppingListService.ingredientEditStarted$.next(id);
+  }
 }

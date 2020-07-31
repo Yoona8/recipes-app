@@ -8,6 +8,7 @@ import * as ingredientsData from '../../mocks/ingredients.json';
 export class ShoppingListService {
   private _ingredients: Ingredient[] = ingredientsData.default;
   public ingredientsChanged$ = new Subject<Ingredient[]>();
+  public ingredientEditStarted$ = new Subject<number>();
 
   get ingredients(): Ingredient[] {
     return this._ingredients.slice();
@@ -21,5 +22,9 @@ export class ShoppingListService {
   addIngredients(ingredients: Ingredient[]) {
     this._ingredients.push(...ingredients);
     this.ingredientsChanged$.next(this._ingredients.slice());
+  }
+
+  getIngredient(index: number): Ingredient {
+    return this._ingredients[index];
   }
 }

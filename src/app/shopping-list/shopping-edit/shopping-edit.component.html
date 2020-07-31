@@ -33,7 +33,9 @@
         class="button"
         type="submit"
         [disabled]="!shoppingEditForm.valid"
-      >Add</button>
+      >
+        {{ isEdit ? 'Save' : 'Add' }}
+      </button>
       <button class="button button--danger" type="button">Delete</button>
       <button class="button" type="reset">Clear</button>
     </p>
