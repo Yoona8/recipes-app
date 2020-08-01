@@ -5,8 +5,18 @@
     <li *ngFor="let ingredient of ingredients; let i = index">
       <a
         href="#"
+        [attr.data-type]="ingredient.name"
         (click)="onIngredientClick($event, i)"
-      >{{ ingredient.name }} [{{ ingredient.amount }}]</a>
+      >
+        <img
+          width="20"
+          [src]="'../assets/images/icons/' + (ingredient.icon
+            ? ingredient.icon
+            : 'i-groceries.svg')"
+          alt="groceries"
+        >
+        {{ ingredient.name }} [{{ ingredient.amount }}]
+      </a>
     </li>
   </ul>
 </section>

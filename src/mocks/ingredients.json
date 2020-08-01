@@ -5,11 +5,13 @@
   },
   {
     "name": "onion",
-    "amount": "1"
+    "amount": "1",
+    "icon": "i-onion.svg"
   },
   {
     "name": "garlic",
-    "amount": "1"
+    "amount": "1",
+    "icon": "i-garlic.svg"
   },
   {
     "name": "parsley",
@@ -21,26 +23,32 @@
   },
   {
     "name": "chickpea flour",
-    "amount": "1"
+    "amount": "1",
+    "icon": "i-flour.svg"
   },
   {
     "name": "turmeric powder",
-    "amount": "1"
+    "amount": "1",
+    "icon": "i-spices.svg"
   },
   {
     "name": "coriander",
-    "amount": "1"
+    "amount": "1",
+    "icon": "i-spices.svg"
   },
   {
     "name": "black pepper",
-    "amount": "1"
+    "amount": "1",
+    "icon": "i-spices.svg"
   },
   {
     "name": "cayenne pepper",
-    "amount": "1"
+    "amount": "1",
+    "icon": "i-spices.svg"
   },
   {
     "name": "sea salt",
-    "amount": "1"
+    "amount": "1",
+    "icon": "i-spices.svg"
   }
 ]

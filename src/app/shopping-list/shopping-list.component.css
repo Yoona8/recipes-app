@@ -9,7 +9,7 @@
   position: relative;
   display: block;
   margin-bottom: 5px;
-  padding: 10px 15px 10px 45px;
+  padding: 10px 15px 10px 50px;
   text-decoration: none;
   border: 1px solid var(--color-neutral-light);
   border-radius: var(--border-radius-small);
@@ -21,12 +21,11 @@
   border-color: var(--color-accent-dark);
 }
 
-.ingredients a::before {
-  content: '';
+.ingredients a img {
   position: absolute;
+  top: 50%;
   left: 15px;
-  width: 20px;
-  height: 20px;
-  background-color: red;
-  border-radius: 50%;
+  display: block;
+  width: 22px;
+  transform: translate(0, -50%);
 }
