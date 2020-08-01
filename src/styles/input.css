@@ -4,10 +4,24 @@
   margin: 0 0 20px;
 }
 
-.input input {
+.input--select::after {
+  content: '';
+  position: absolute;
+  bottom: 17px;
+  right: 15px;
+  width: 0;
+  height: 0;
+  border: 5px solid transparent;
+  border-top: 7px solid currentColor;
+  border-bottom-width: 0;
+}
+
+.input input,
+.input select {
   width: 100%;
   padding: 10px 15px;
   font: inherit;
+  background-color: transparent;
   border: 1px solid var(--color-basic-black);
   border-radius: var(--border-radius-small);
   box-sizing: border-box;
@@ -15,12 +29,20 @@
   outline: none;
 }
 
+.input--select select {
+  padding-right: 35px;
+  appearance: none;
+}
+
 .input input:not(:disabled):hover,
-.input input:focus {
+.input input:focus,
+.input select:not(:disabled):hover,
+.input select:focus {
   border-color: var(--color-accent-dark);
 }
 
-.input input:focus {
+.input input:focus,
+.input select:focus {
   box-shadow: 0 0 0 1px var(--color-accent-dark) inset;
 }
 
