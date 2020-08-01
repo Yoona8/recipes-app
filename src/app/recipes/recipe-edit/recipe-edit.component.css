@@ -1,0 +1,32 @@
+.image-preview {
+  width: 313px;
+  margin: 0 0 20px;
+  border-radius: var(--border-radius-number);
+  overflow: hidden;
+}
+
+.image-preview img {
+  display: block;
+}
+
+.fields {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ingredients {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ingredients li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ingredient-name {
+  width: 50%;
+}

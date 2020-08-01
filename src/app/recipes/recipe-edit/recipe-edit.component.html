@@ -1,3 +1,47 @@
 <section class="recipe-edit">
   <h1 class="title">Add new recipe</h1>
+  <p class="image-preview">
+    <img
+      [src]=""
+      [alt]=""
+    >
+  </p>
+  <form>
+    <ul class="fields">
+      <li class="input">
+        <label for="recipe-edit-name">Name</label>
+        <input
+          id="recipe-edit-name"
+          type="text">
+      </li>
+      <li class="input">
+        <label for="recipe-edit-image">Image path</label>
+        <input
+          id="recipe-edit-image"
+          type="text">
+      </li>
+      <li class="input">
+        <label for="recipe-edit-description">Description</label>
+        <textarea
+          id="recipe-edit-description"
+          rows="5"
+        ></textarea>
+      </li>
+      <li>
+        <ul class="ingredients">
+          <li>
+            <p class="input ingredient-name">
+              <label for="recipe-edit-ingredient">Ingredient</label>
+              <input id="recipe-edit-ingredient" type="text">
+            </p>
+            <p class="input">
+              <label for="recipe-edit-ingredient-amount">Amount</label>
+              <input id="recipe-edit-ingredient-amount" type="number">
+            </p>
+            <button type="button" class="button">Delete</button>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </form>
 </section>

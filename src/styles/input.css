@@ -17,7 +17,8 @@
 }
 
 .input input,
-.input select {
+.input select,
+.input textarea {
   width: 100%;
   padding: 10px 15px;
   font: inherit;
@@ -29,6 +30,10 @@
   outline: none;
 }
 
+.input textarea {
+  resize: none;
+}
+
 .input--select select {
   padding-right: 35px;
   appearance: none;
@@ -37,12 +42,15 @@
 .input input:not(:disabled):hover,
 .input input:focus,
 .input select:not(:disabled):hover,
-.input select:focus {
+.input select:focus,
+.input textarea:not(:disabled):hover,
+.input textarea:focus {
   border-color: var(--color-accent-dark);
 }
 
 .input input:focus,
-.input select:focus {
+.input select:focus,
+.input textarea:focus {
   box-shadow: 0 0 0 1px var(--color-accent-dark) inset;
 }
 
