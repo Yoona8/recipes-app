@@ -1,8 +1,11 @@
 <section class="recipe-edit">
-  <h1 class="title">Add new recipe</h1>
+  <h1 class="title">
+    {{ isEdit ? 'Edit recipe' : 'Add new recipe' }}
+  </h1>
   <p class="image-preview">
     <img
-      [src]="'assets/images/recipes/falafel.jpg'"
+      *ngIf="!!image"
+      [src]="'assets/images/recipes/' + image + '.jpg'"
       [alt]=""
     >
   </p>

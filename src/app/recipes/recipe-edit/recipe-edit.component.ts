@@ -77,6 +77,14 @@ export class RecipeEditComponent implements OnInit {
     return (<FormArray>this.recipeForm.get('ingredients')).controls;
   }
 
+  get image(): string {
+    return (<FormControl>this.recipeForm.get('image')).value;
+  }
+
+  get isEdit(): boolean {
+    return this._isEdit;
+  }
+
   onAddIngredientClick() {
     this._addIngredientControl();
   }
