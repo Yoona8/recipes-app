@@ -2,46 +2,67 @@
   <h1 class="title">Add new recipe</h1>
   <p class="image-preview">
     <img
-      [src]=""
+      [src]="'assets/images/recipes/falafel.jpg'"
       [alt]=""
     >
   </p>
-  <form>
+  <form [formGroup]="recipeForm" (submit)="onSubmit()">
     <ul class="fields">
       <li class="input">
         <label for="recipe-edit-name">Name</label>
         <input
           id="recipe-edit-name"
-          type="text">
+          type="text"
+          formControlName="name"
+        >
       </li>
       <li class="input">
         <label for="recipe-edit-image">Image path</label>
         <input
           id="recipe-edit-image"
-          type="text">
+          type="text"
+          formControlName="image"
+        >
       </li>
       <li class="input">
         <label for="recipe-edit-description">Description</label>
         <textarea
           id="recipe-edit-description"
           rows="5"
+          formControlName="description"
         ></textarea>
       </li>
       <li>
-        <ul class="ingredients">
-          <li>
+        <ul class="ingredients" formArrayName="ingredients">
+          <li
+            *ngFor="let ingredientControl of ingredientControls; let i = index"
+            [formGroupName]="i">
             <p class="input ingredient-name">
               <label for="recipe-edit-ingredient">Ingredient</label>
-              <input id="recipe-edit-ingredient" type="text">
+              <input
+                id="recipe-edit-ingredient"
+                type="text"
+                formControlName="name"
+              >
             </p>
             <p class="input">
               <label for="recipe-edit-ingredient-amount">Amount</label>
-              <input id="recipe-edit-ingredient-amount" type="number">
+              <input
+                id="recipe-edit-ingredient-amount"
+                type="number"
+                formControlName="amount"
+              >
             </p>
             <button type="button" class="button">Delete</button>
           </li>
         </ul>
       </li>
     </ul>
+    <p class="add-ingredient">
+      <button class="button" type="button" (click)="onAddIngredientClick()">
+        Add Ingredient
+      </button>
+    </p>
+    <button class="button" type="submit">Save</button>
   </form>
 </section>
