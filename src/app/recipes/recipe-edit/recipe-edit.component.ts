@@ -4,7 +4,7 @@ import {
   AbstractControl,
   FormArray,
   FormControl,
-  FormGroup
+  FormGroup, Validators
 } from '@angular/forms';
 import { RecipesService } from '../recipes.service';
 import { Ingredient } from '../../shared/ingredient.model';
@@ -54,9 +54,9 @@ export class RecipeEditComponent implements OnInit {
     }
 
     this.recipeForm = new FormGroup({
-      'name': new FormControl(name),
-      'image': new FormControl(image),
-      'description': new FormControl(description),
+      'name': new FormControl(name, Validators.required),
+      'image': new FormControl(image, Validators.required),
+      'description': new FormControl(description, Validators.required),
       'ingredients': this._ingredientControls
     });
   }
@@ -67,8 +67,11 @@ export class RecipeEditComponent implements OnInit {
 
     this._ingredientControls.push(
       new FormGroup({
-        'name': new FormControl(name),
-        'amount': new FormControl(amount)
+        'name': new FormControl(name, Validators.required),
+        'amount': new FormControl(amount, [
+          Validators.required,
+          Validators.pattern(/^[1-9]+[0-9]*/)
+        ])
       })
     );
   }

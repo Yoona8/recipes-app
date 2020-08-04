@@ -2,9 +2,8 @@
   <h1 class="title">
     {{ isEdit ? 'Edit recipe' : 'Add new recipe' }}
   </h1>
-  <p class="image-preview">
+  <p class="image-preview" *ngIf="!!image">
     <img
-      *ngIf="!!image"
       [src]="'assets/images/recipes/' + image + '.jpg'"
       [alt]=""
     >
@@ -66,6 +65,10 @@
         Add Ingredient
       </button>
     </p>
-    <button class="button" type="submit">Save</button>
+    <button
+      class="button"
+      type="submit"
+      [disabled]="!recipeForm.valid"
+    >Save</button>
   </form>
 </section>

@@ -30,6 +30,18 @@
   outline: none;
 }
 
+.input input:not(:disabled).ng-invalid.ng-touched,
+.input select:not(:disabled).ng-invalid.ng-touched,
+.input textarea:not(:disabled).ng-invalid.ng-touched {
+  border-color: var(--color-error);
+}
+
+.input input:focus.ng-invalid.ng-touched,
+.input select:focus.ng-invalid.ng-touched,
+.input textarea:focus.ng-invalid.ng-touched {
+  box-shadow: 0 0 0 1px var(--color-error) inset;
+}
+
 .input textarea {
   resize: none;
 }
