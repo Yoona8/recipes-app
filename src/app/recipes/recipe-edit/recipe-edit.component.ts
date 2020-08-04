@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { RecipesService } from '../recipes.service';
 import { Ingredient } from '../../shared/ingredient.model';
+import { Recipe } from '../recipe.model';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -93,6 +94,18 @@ export class RecipeEditComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.recipeForm);
+    const recipe: Recipe = {
+      name: this.recipeForm.value['name'],
+      description: this.recipeForm.value['description'],
+      image: this.recipeForm.value['image'],
+      ingredients: this.recipeForm.value['ingredients']
+    };
+
+    if (this._isEdit) {
+      this.recipesService.updateRecipe(this._id, recipe);
+      return;
+    }
+
+    this.recipesService.addRecipe(recipe);
   }
 }
