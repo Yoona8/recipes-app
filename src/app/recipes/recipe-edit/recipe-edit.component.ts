@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import {
   AbstractControl,
   FormArray,
@@ -23,6 +23,7 @@ export class RecipeEditComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private recipesService: RecipesService
   ) { }
 
@@ -103,9 +104,14 @@ export class RecipeEditComponent implements OnInit {
 
     if (this._isEdit) {
       this.recipesService.updateRecipe(this._id, recipe);
-      return;
+    } else {
+      this.recipesService.addRecipe(recipe);
     }
 
-    this.recipesService.addRecipe(recipe);
+    this.router.navigate(['../'], { relativeTo: this.route });
+  }
+
+  onCancelClick() {
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 }

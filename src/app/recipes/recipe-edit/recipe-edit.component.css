@@ -34,3 +34,11 @@
 .add-ingredient {
   margin: 0 0 20px;
 }
+
+.buttons {
+  margin: 0;
+}
+
+.buttons .button {
+  margin-right: 7px;
+}

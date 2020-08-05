@@ -65,10 +65,17 @@
         Add Ingredient
       </button>
     </p>
-    <button
-      class="button"
-      type="submit"
-      [disabled]="!recipeForm.valid"
-    >Save</button>
+    <p class="buttons">
+      <button
+        class="button"
+        type="submit"
+        [disabled]="!recipeForm.valid"
+      >Save</button>
+      <button
+        class="button button--danger"
+        type="button"
+        (click)="onCancelClick()"
+      >Cancel</button>
+    </p>
   </form>
 </section>
