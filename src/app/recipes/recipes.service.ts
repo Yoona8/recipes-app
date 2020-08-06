@@ -1,20 +1,23 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Recipe } from './recipe.model';
-// @ts-ignore
-import * as recipesData from '../../mocks/recipes.json';
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { Subject } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 export class RecipesService {
-  private _recipes: Recipe[] = recipesData.default;
+  private _recipes: Recipe[] = [];
   public recipesChanged$ = new Subject<Recipe[]>();
 
   constructor(private shoppingListService: ShoppingListService) {}
 
   get recipes(): Recipe[] {
     return this._recipes.slice();
+  }
+
+  setRecipes(recipes: Recipe[]) {
+    this._recipes = recipes;
+    this.recipesChanged$.next(this.recipes.slice());
   }
 
   getRecipe(id): Recipe {
