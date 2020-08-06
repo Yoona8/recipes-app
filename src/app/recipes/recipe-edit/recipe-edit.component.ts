@@ -114,4 +114,8 @@ export class RecipeEditComponent implements OnInit {
   onCancelClick() {
     this.router.navigate(['../'], { relativeTo: this.route });
   }
+
+  onDeleteIngredientClick(controlIndex: number) {
+    this._ingredientControls.removeAt(controlIndex);
+  }
 }

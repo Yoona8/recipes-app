@@ -55,7 +55,11 @@
                 formControlName="amount"
               >
             </p>
-            <button type="button" class="button">Delete</button>
+            <button
+              type="button"
+              class="button"
+              (click)="onDeleteIngredientClick(i)"
+            >Delete</button>
           </li>
         </ul>
       </li>
