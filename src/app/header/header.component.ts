@@ -16,6 +16,6 @@ export class HeaderComponent {
 
   onFetchDataClick(evt): void {
     evt.preventDefault();
-    this.dataStorageService.getRecipes();
+    this.dataStorageService.getRecipes().subscribe();
   }
 }
