@@ -12,6 +12,6 @@
   </div>
   <div class="text-wrapper">
     <h3 class="title">{{ recipe.name }}</h3>
-    <p class="description">{{ recipe.description }}</p>
+    <p class="description">{{ recipe.description | shorten:83 }}</p>
   </div>
 </a>
