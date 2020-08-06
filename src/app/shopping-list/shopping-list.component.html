@@ -15,7 +15,7 @@
             : 'i-groceries.svg')"
           alt="groceries"
         >
-        {{ ingredient.name }} [{{ ingredient.amount }}]
+        {{ ingredient.name | lowercase }} [{{ ingredient.amount }}]
       </a>
     </li>
   </ul>
