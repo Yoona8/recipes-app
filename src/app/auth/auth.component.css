@@ -1,0 +1,26 @@
+.auth {
+  width: 500px;
+  margin: 0 auto;
+}
+
+.auth .title {
+  margin-bottom: 5px;
+}
+
+a {
+  display: inline-block;
+  vertical-align: baseline;
+  margin-bottom: 20px;
+  color: var(--color-accent-dark);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.fields {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

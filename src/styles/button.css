@@ -1,6 +1,7 @@
 .button {
   display: inline-block;
   vertical-align: middle;
+  min-width: 110px;
   margin: 0;
   padding: 10px 20px;
   font: inherit;
