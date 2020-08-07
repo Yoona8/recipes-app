@@ -27,4 +27,11 @@
 
 .ingredients .title {
   font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.ingredients ul {
+  margin: 0;
+  padding: 0;
+  list-style-position: inside;
 }
