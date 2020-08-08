@@ -10,6 +10,7 @@ import { AuthService } from './auth.service';
 export class AuthComponent implements OnInit {
   private _isLogin = true;
   private _isLoading = false;
+  private _errorMessage: string;
   public authForm: FormGroup;
 
   constructor(private authService: AuthService) {}
@@ -34,6 +35,10 @@ export class AuthComponent implements OnInit {
 
   get isLoading(): boolean {
     return this._isLoading;
+  }
+
+  get errorMessage(): string {
+    return this._errorMessage;
   }
 
   switchLogin() {
@@ -61,11 +66,10 @@ export class AuthComponent implements OnInit {
       this.authService.signup(email, password).subscribe(
         (response) => {
           this._isLoading = false;
-          console.log(response);
         },
-        (error) => {
+        (errorMessage) => {
           this._isLoading = false;
-          console.log(error);
+          this._errorMessage = errorMessage;
         }
       );
     }

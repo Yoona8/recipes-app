@@ -5,6 +5,9 @@
     <a href="#" (click)="onSwitchModeClick($event)">
       Switch to {{ isLogin ? 'sign up' : 'login' }}
     </a>
+    <p class="error-block" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </p>
     <ul class="fields">
       <li class="input">
         <label for="auth-email">Email</label>
