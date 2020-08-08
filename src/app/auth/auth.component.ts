@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 export class AuthComponent implements OnInit {
   private _isLogin = true;
   private _isLoading = false;
-  private _errorMessage: string;
+  private _errorMessage: string | null;
   public authForm: FormGroup;
 
   constructor(private authService: AuthService) {}
@@ -44,6 +44,7 @@ export class AuthComponent implements OnInit {
 
   switchLogin() {
     this._isLogin = !this._isLogin;
+    this._errorMessage = null;
     this.authForm.reset();
   }
 
