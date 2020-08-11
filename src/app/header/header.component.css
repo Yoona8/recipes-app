@@ -8,6 +8,14 @@ a {
   color: inherit;
 }
 
+.header a {
+  text-decoration: none;
+}
+
+.header a:hover {
+  text-decoration: underline;
+}
+
 .container {
   display: flex;
   align-items: center;
@@ -34,12 +42,13 @@ a {
   color: var(--color-accent-light);
 }
 
-.main-menu a {
-  text-decoration: none;
+.user-nav {
+  display: flex;
+  list-style: none;
 }
 
-.main-menu a:hover {
-  text-decoration: underline;
+.user-nav > li {
+  margin-left: 20px;
 }
 
 .toggle {

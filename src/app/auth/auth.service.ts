@@ -21,7 +21,7 @@ const requests = {
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
-  private _user = new Subject<User>();
+  public user = new Subject<User>();
 
   constructor(private http: HttpClient) {}
 
@@ -67,13 +67,13 @@ export class AuthService {
     email: string,
     id: string,
     token: string,
-    expIn: number
+    expiresIn: number
   ) {
     const now = new Date();
-    const expDate = new Date(now.getTime() + expIn * 1000);
-    const user = new User(email, id, token, expDate);
+    const expirationDate = new Date(now.getTime() + expiresIn * 1000);
+    const user = new User(email, id, token, expirationDate);
 
-    this._user.next(user);
+    this.user.next(user);
   }
 
   private _handleError(errorResponse: HttpErrorResponse) {

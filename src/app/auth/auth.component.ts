@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthResponseData, AuthService } from './auth.service';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -14,7 +15,10 @@ export class AuthComponent implements OnInit {
   private _errorMessage: string | null;
   public authForm: FormGroup;
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this._initForm();
@@ -71,7 +75,9 @@ export class AuthComponent implements OnInit {
 
     authObservable.subscribe(
       (response) => {
+        console.log(response);
         this._isLoading = false;
+        this.router.navigate(['/recipes']);
       },
       (errorMessage) => {
         this._isLoading = false;
