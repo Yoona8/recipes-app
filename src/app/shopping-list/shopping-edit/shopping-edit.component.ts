@@ -14,6 +14,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   private _ingredientIndex: number;
   private _isEdit = false;
   private _ingredient: Ingredient;
+  private _defaultIcon = 'i-groceries.svg';
   @ViewChild('shoppingEditForm') shoppingEditForm: NgForm;
 
   constructor(private shoppingListService: ShoppingListService) {}
@@ -26,7 +27,8 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
         this._ingredient = this.shoppingListService.getIngredient(index);
         this.shoppingEditForm.setValue({
           name: this._ingredient.name,
-          amount: this._ingredient.amount
+          amount: this._ingredient.amount,
+          icon: this._ingredient.icon || this._defaultIcon
         });
       });
   }
@@ -43,7 +45,8 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     const formValue = form.value;
     const newIngredient: Ingredient = {
       name: formValue.name,
-      amount: formValue.amount
+      amount: formValue.amount,
+      icon: formValue.icon
     };
 
     if (this._isEdit) {
