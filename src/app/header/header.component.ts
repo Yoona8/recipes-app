@@ -32,4 +32,9 @@ export class HeaderComponent implements OnInit {
     evt.preventDefault();
     this.dataStorageService.getRecipes().subscribe();
   }
+
+  onLogoutClick(evt) {
+    evt.preventDefault();
+    this.authService.logout();
+  }
 }

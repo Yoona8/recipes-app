@@ -20,7 +20,7 @@
     </ul>
     <ul class="user-nav" *ngIf="isAuthenticated">
       <li>
-        <a href="#">Logout</a>
+        <a href="#" (click)="onLogoutClick($event)">Logout</a>
       </li>
       <li>
         <div class="user-menu-container dropdown" appDropdown>
