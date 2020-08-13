@@ -18,11 +18,9 @@ import { RecipesRoutingModule } from './recipes-routing.module';
     RecipeDetailComponent,
     RecipeItemComponent,
     RecipeStartComponent,
-    RecipeEditComponent,
-    ShortenPipe,
+    RecipeEditComponent
   ],
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     SharedModule,
     RecipesRoutingModule
