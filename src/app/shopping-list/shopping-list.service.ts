@@ -9,10 +9,6 @@ export class ShoppingListService {
   private _ingredients: Ingredient[] = ingredientsData.default;
   public ingredientEditStarted$ = new Subject<number>();
 
-  addIngredients(ingredients: Ingredient[]) {
-    this._ingredients.push(...ingredients);
-  }
-
   getIngredient(index: number): Ingredient {
     return this._ingredients[index];
   }
