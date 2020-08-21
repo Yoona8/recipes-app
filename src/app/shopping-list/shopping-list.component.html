@@ -2,7 +2,10 @@
   <app-shopping-edit></app-shopping-edit>
   <h2>Shopping List</h2>
   <ul class="ingredients">
-    <li *ngFor="let ingredient of ingredients; let i = index">
+    <li *ngFor="
+      let ingredient of (ingredients$ | async).ingredients;
+      let i = index
+    ">
       <a
         href="#"
         [attr.data-type]="ingredient.name"

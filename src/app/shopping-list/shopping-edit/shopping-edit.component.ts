@@ -1,8 +1,12 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Ingredient } from '../../shared/ingredient.model';
-import { ShoppingListService } from '../shopping-list.service';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+
+import { Ingredient } from '../../shared/ingredient.model';
+import { ShoppingListService } from '../shopping-list.service';
+import * as fromApp from '../../store/app.reducer';
+import * as ShoppingListActions from '../store/shopping-list.actions';
 
 @Component({
   selector: 'app-shopping-edit',
@@ -17,7 +21,10 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   private _defaultIcon = 'i-groceries.svg';
   @ViewChild('shoppingEditForm') shoppingEditForm: NgForm;
 
-  constructor(private shoppingListService: ShoppingListService) {}
+  constructor(
+    private shoppingListService: ShoppingListService,
+    private store: Store<fromApp.AppState>
+  ) {}
 
   ngOnInit(): void {
     this._ingredientEditStarted$ = this.shoppingListService
@@ -41,7 +48,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     return this._isEdit;
   }
 
-  onAddIngredient(form: NgForm): void {
+  onSubmit(form: NgForm): void {
     const formValue = form.value;
     const newIngredient: Ingredient = {
       name: formValue.name,
@@ -53,7 +60,8 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
       this.shoppingListService
         .updateIngredient(this._ingredientIndex, newIngredient);
     } else {
-      this.shoppingListService.addIngredient(newIngredient);
+      this.store
+        .dispatch(new ShoppingListActions.AddIngredient(newIngredient));
     }
 
     this._isEdit = false;
