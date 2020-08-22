@@ -22,13 +22,14 @@
 }
 
 .ingredients li {
-  display: flex;
+  display: grid;
+  grid-template-columns: 50% 1fr min-content;
+  gap: 15px;
   align-items: center;
-  justify-content: space-between;
 }
 
-.ingredient-name {
-  width: 50%;
+.ingredients .button {
+  min-width: auto;
 }
 
 .add-ingredient {
