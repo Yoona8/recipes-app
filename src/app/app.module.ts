@@ -19,7 +19,7 @@ import * as fromApp from './store/app.reducer';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    StoreModule.forRoot(fromApp.appReducer),
+    StoreModule.forRoot(fromApp.appReducerMap),
     SharedModule
   ],
   providers: [{
