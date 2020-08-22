@@ -5,12 +5,7 @@ import { map, tap } from 'rxjs/operators';
 
 import { Recipe } from '../recipes/recipe.model';
 import { RecipesService } from '../recipes/recipes.service';
-import { AuthService } from '../auth/auth.service';
-
-const requests = {
-  recipes: 'recipes.json',
-  url: 'https://recipes-app-b4d95.firebaseio.com/'
-};
+import { environment } from '../../environments/environment';
 
 @Injectable({providedIn: 'root'})
 export class DataStorageService {
@@ -21,12 +16,12 @@ export class DataStorageService {
 
   saveRecipes(): void {
     const recipes = this.recipesService.recipes;
-    this.http.put(`${requests.url}${requests.recipes}`, recipes)
+    this.http.put(environment.urlRecipes, recipes)
       .subscribe(response => console.log(response));
   }
 
   getRecipes(): Observable<Recipe[]> {
-    return this.http.get<Recipe[]>(`${requests.url}${requests.recipes}`).pipe(
+    return this.http.get<Recipe[]>(environment.urlRecipes).pipe(
       map((recipes: Recipe[]) => {
         return recipes.map((recipe: Recipe) => {
           const ingredients = recipe.ingredients || [];

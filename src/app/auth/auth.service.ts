@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { catchError, tap } from 'rxjs/operators';
 import { BehaviorSubject, throwError } from 'rxjs';
 import { User } from './user.model';
+import { environment } from '../../environments/environment';
 
 export interface AuthResponseData {
   idToken: string;
@@ -13,12 +14,6 @@ export interface AuthResponseData {
   localId: string;
   registered?: boolean;
 }
-
-const requests = {
-  urlSignup: 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=',
-  urlLogin: 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=',
-  key: 'AIzaSyDuhX9fSL604_aS04y_v42tB1EB2oO2F1c'
-};
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
@@ -32,7 +27,7 @@ export class AuthService {
 
   signup(email: string, password: string) {
     return this.http
-      .post<AuthResponseData>(`${requests.urlSignup}${requests.key}`, {
+      .post<AuthResponseData>(environment.urlSignup, {
         email,
         password,
         returnSecureToken: true
@@ -51,7 +46,7 @@ export class AuthService {
 
   login(email: string, password: string) {
     return this.http
-      .post<AuthResponseData>(`${requests.urlLogin}${requests.key}`, {
+      .post<AuthResponseData>(environment.urlLogin, {
         email,
         password,
         returnSecureToken: true
