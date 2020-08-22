@@ -13,7 +13,7 @@ import * as ShoppingListActions from '../store/shopping-list.actions';
   styleUrls: ['./shopping-edit.component.css']
 })
 export class ShoppingEditComponent implements OnInit, OnDestroy {
-  private _ingredientEditStarted$: Subscription;
+  private ingredientsEdit$: Subscription;
   private _isEdit = false;
   private _ingredient: Ingredient;
   private _defaultIcon = 'i-groceries.svg';
@@ -24,21 +24,22 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.store.select('shoppingList').subscribe((stateData) => {
-      if (stateData.editedIngredientIndex > -1) {
-        this._isEdit = true;
-        this._ingredient = stateData.editedIngredient;
-        this.shoppingEditForm.setValue({
-          name: this._ingredient.name,
-          amount: this._ingredient.amount,
-          icon: this._ingredient.icon || this._defaultIcon
-        });
-      }
-    });
+    this.ingredientsEdit$ = this.store.select('shoppingList').subscribe(
+      (stateData) => {
+        if (stateData.editedIngredientIndex > -1) {
+          this._isEdit = true;
+          this._ingredient = stateData.editedIngredient;
+          this.shoppingEditForm.setValue({
+            name: this._ingredient.name,
+            amount: this._ingredient.amount,
+            icon: this._ingredient.icon || this._defaultIcon
+          });
+        }
+      });
   }
 
   ngOnDestroy(): void {
-    this._ingredientEditStarted$.unsubscribe();
+    this.ingredientsEdit$.unsubscribe();
     this.store.dispatch(new ShoppingListActions.StopEdit());
   }
 
