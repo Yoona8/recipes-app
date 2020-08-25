@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { BehaviorSubject, throwError } from 'rxjs';
+import { throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
@@ -21,7 +21,6 @@ export interface AuthResponseData {
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
-  // public user = new BehaviorSubject<User>(null);
   private tokenExpirationTimer: any;
 
   constructor(
@@ -33,25 +32,6 @@ export class AuthService {
   signup(email: string, password: string) {
     return this.http
       .post<AuthResponseData>(environment.urlSignup, {
-        email,
-        password,
-        returnSecureToken: true
-      }).pipe(
-        catchError(this._handleError),
-        tap(response => {
-          this._handleUserAuth(
-            response.email,
-            response.localId,
-            response.idToken,
-            +response.expiresIn
-          );
-        })
-      );
-  }
-
-  login(email: string, password: string) {
-    return this.http
-      .post<AuthResponseData>(environment.urlLogin, {
         email,
         password,
         returnSecureToken: true
@@ -127,12 +107,6 @@ export class AuthService {
     const expirationDate = new Date(now.getTime() + expiresIn * 1000);
     const user = new User(email, id, token, expirationDate);
 
-    this.store.dispatch(new AuthActions.AuthenticateSuccess({
-      email,
-      id,
-      token,
-      expirationDate
-    }));
     localStorage.setItem('userData', JSON.stringify(user));
     this.autoLogout(expiresIn * 1000);
   }
