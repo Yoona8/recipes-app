@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 
-import { AuthResponseData, AuthService } from './auth.service';
 import * as fromApp from '../store/app.reducer';
 import * as AuthActions from './store/auth.actions';
 
@@ -13,24 +12,30 @@ import * as AuthActions from './store/auth.actions';
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css']
 })
-export class AuthComponent implements OnInit {
-  private _isLogin = true;
-  private _isLoading = false;
-  private _errorMessage: string | null;
+export class AuthComponent implements OnInit, OnDestroy {
+  public isLogin = true;
+  public isLoading = false;
+  public errorMessage: string | null;
   public authForm: FormGroup;
+  private store$: Subscription;
 
   constructor(
-    private authService: AuthService,
     private router: Router,
     private store: Store<fromApp.AppState>
   ) {}
 
   ngOnInit(): void {
     this._initForm();
-    this.store.select('auth').subscribe(authState => {
-      this._errorMessage = authState.errorMessage;
-      this._isLoading = authState.loading;
+    this.store$ = this.store.select('auth').subscribe(authState => {
+      this.errorMessage = authState.errorMessage;
+      this.isLoading = authState.loading;
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.store$) {
+      this.store$.unsubscribe();
+    }
   }
 
   private _initForm() {
@@ -43,21 +48,9 @@ export class AuthComponent implements OnInit {
     });
   }
 
-  get isLogin(): boolean {
-    return this._isLogin;
-  }
-
-  get isLoading(): boolean {
-    return this._isLoading;
-  }
-
-  get errorMessage(): string {
-    return this._errorMessage;
-  }
-
-  switchLogin() {
-    this._isLogin = !this._isLogin;
-    this._errorMessage = null;
+  private switchLogin() {
+    this.isLogin = !this.isLogin;
+    this.store.dispatch(new AuthActions.ClearError());
     this.authForm.reset();
   }
 
@@ -71,21 +64,18 @@ export class AuthComponent implements OnInit {
       return;
     }
 
-    this._isLoading = true;
-
     const {email, password} = this.authForm.value;
-    let authObservable: Observable<AuthResponseData>;
 
-    console.log(this._isLogin);
-
-    if (this._isLogin) {
-      // authObservable = this.authService.login(email, password);
+    if (this.isLogin) {
       this.store.dispatch(new AuthActions.LoginStart({
         email,
         password
       }));
     } else {
-      authObservable = this.authService.signup(email, password);
+      this.store.dispatch(new AuthActions.SignupStart({
+        email,
+        password
+      }));
     }
 
     this.authForm.reset();

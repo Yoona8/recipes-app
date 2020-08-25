@@ -1,12 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
 import { User } from './user.model';
-import { environment } from '../../environments/environment';
 import * as fromApp from '../store/app.reducer';
 import * as AuthActions from './store/auth.actions';
 
@@ -24,29 +19,8 @@ export class AuthService {
   private tokenExpirationTimer: any;
 
   constructor(
-    private http: HttpClient,
-    private router: Router,
     private store: Store<fromApp.AppState>
   ) {}
-
-  signup(email: string, password: string) {
-    return this.http
-      .post<AuthResponseData>(environment.urlSignup, {
-        email,
-        password,
-        returnSecureToken: true
-      }).pipe(
-        catchError(this._handleError),
-        tap(response => {
-          this._handleUserAuth(
-            response.email,
-            response.localId,
-            response.idToken,
-            +response.expiresIn
-          );
-        })
-      );
-  }
 
   autoLogin() {
     const userData: {
@@ -83,8 +57,6 @@ export class AuthService {
   }
 
   logout() {
-    this.store.dispatch(new AuthActions.Logout());
-    this.router.navigate(['/auth']);
     localStorage.removeItem('userData');
     if (this.tokenExpirationTimer) {
       clearTimeout(this.tokenExpirationTimer);
@@ -95,39 +67,5 @@ export class AuthService {
     this.tokenExpirationTimer = setTimeout(() => {
       this.logout();
     }, expirationDuration);
-  }
-
-  private _handleUserAuth(
-    email: string,
-    id: string,
-    token: string,
-    expiresIn: number
-  ) {
-    const now = new Date();
-    const expirationDate = new Date(now.getTime() + expiresIn * 1000);
-    const user = new User(email, id, token, expirationDate);
-
-    localStorage.setItem('userData', JSON.stringify(user));
-    this.autoLogout(expiresIn * 1000);
-  }
-
-  private _handleError(errorResponse: HttpErrorResponse) {
-    let errorMessage = 'An unknown error occurred!';
-
-    if (!errorResponse.error || !errorResponse.error.error) {
-      return throwError(errorMessage);
-    }
-
-    switch (errorResponse.error.error.message) {
-      case 'EMAIL_EXISTS':
-        errorMessage = 'The email you\'ve entered already exists.';
-        break;
-      case 'EMAIL_NOT_FOUND':
-      case 'INVALID_PASSWORD':
-        errorMessage = 'Email and password do not match.';
-        break;
-    }
-
-    return throwError(errorMessage);
   }
 }
