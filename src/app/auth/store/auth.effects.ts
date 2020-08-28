@@ -8,6 +8,7 @@ import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { User } from '../user.model';
 import * as AuthActions from './auth.actions';
+import { AuthService } from '../auth.service';
 
 export interface AuthResponseData {
   idToken: string;
@@ -72,6 +73,9 @@ export class AuthEffects {
           password: authData.payload.password,
           returnSecureToken: true
         }).pipe(
+          tap((responseData: AuthResponseData) => {
+            this.authService.setLogoutTimer(+responseData.expiresIn * 1000);
+          }),
           map((responseData: AuthResponseData) => {
             return handleUserAuth(
               responseData.email,
@@ -97,6 +101,9 @@ export class AuthEffects {
           password: authData.payload.password,
           returnSecureToken: true
         }).pipe(
+          tap((responseData: AuthResponseData) => {
+            this.authService.setLogoutTimer(+responseData.expiresIn * 1000);
+          }),
           map((responseData: AuthResponseData) => {
             return handleUserAuth(
               responseData.email,
@@ -114,17 +121,8 @@ export class AuthEffects {
 
   @Effect({ dispatch: false })
   authRedirect = this.actions$.pipe(
-    ofType(AuthActions.AUTHENTICATE_SUCCESS, AuthActions.LOGOUT),
-    tap((authAction: AuthActions.AuthActions) => {
-      switch (authAction.type) {
-        case AuthActions.AUTHENTICATE_SUCCESS:
-          this.router.navigate(['/']);
-          break;
-        default:
-          this.router.navigate(['/auth']);
-          break;
-      }
-    })
+    ofType(AuthActions.AUTHENTICATE_SUCCESS),
+    tap(() => this.router.navigate(['/']))
   );
 
   @Effect({ dispatch: false })
@@ -132,6 +130,8 @@ export class AuthEffects {
     ofType(AuthActions.LOGOUT),
     tap(() => {
       localStorage.removeItem('userData');
+      this.authService.clearLogoutTimer();
+      this.router.navigate(['/auth']);
     })
   );
 
@@ -160,6 +160,11 @@ export class AuthEffects {
       );
 
       if (loadedUser.token) {
+        const now = new Date().getTime();
+        const expirationDuration = expirationDate.getTime() - now;
+
+        this.authService.setLogoutTimer(expirationDuration);
+
         return new AuthActions.AuthenticateSuccess({
           email: loadedUser.email,
           id: loadedUser.id,
@@ -173,6 +178,7 @@ export class AuthEffects {
   constructor(
     private actions$: Actions,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 }
