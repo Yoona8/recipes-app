@@ -6,6 +6,7 @@ import { of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
+import { User } from '../user.model';
 import * as AuthActions from './auth.actions';
 
 export interface AuthResponseData {
@@ -27,6 +28,9 @@ const handleUserAuth = (
   const expirationDate = new Date(
     now.getTime() + expiresIn * 1000
   );
+  const user = new User(email, id, token, expirationDate);
+
+  localStorage.setItem('userData', JSON.stringify(user));
 
   return new AuthActions.AuthenticateSuccess({
     email,
@@ -119,6 +123,49 @@ export class AuthEffects {
         default:
           this.router.navigate(['/auth']);
           break;
+      }
+    })
+  );
+
+  @Effect({ dispatch: false })
+  authLogout = this.actions$.pipe(
+    ofType(AuthActions.LOGOUT),
+    tap(() => {
+      localStorage.removeItem('userData');
+    })
+  );
+
+  @Effect()
+  autoLogin = this.actions$.pipe(
+    ofType(AuthActions.AUTO_LOGIN),
+    map(() => {
+      const userData: {
+        email: string;
+        id: string;
+        _token: string;
+        _tokenExpirationDate: string;
+      } = JSON.parse(localStorage.getItem('userData'));
+
+      if (!userData) {
+        return;
+      }
+
+      const expirationDate = new Date(userData._tokenExpirationDate);
+
+      const loadedUser = new User(
+        userData.email,
+        userData.id,
+        userData._token,
+        expirationDate
+      );
+
+      if (loadedUser.token) {
+        return new AuthActions.AuthenticateSuccess({
+          email: loadedUser.email,
+          id: loadedUser.id,
+          token: loadedUser.token,
+          expirationDate
+        });
       }
     })
   );
