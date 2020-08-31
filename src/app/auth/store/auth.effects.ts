@@ -147,7 +147,7 @@ export class AuthEffects {
       } = JSON.parse(localStorage.getItem('userData'));
 
       if (!userData) {
-        return;
+        return { type: 'Action' };
       }
 
       const expirationDate = new Date(userData._tokenExpirationDate);
