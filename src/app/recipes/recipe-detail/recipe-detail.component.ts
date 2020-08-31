@@ -6,6 +6,7 @@ import { Recipe } from '../recipe.model';
 import { RecipesService } from '../recipes.service';
 import * as fromApp from '../../store/app.reducer';
 import * as ShoppingListActions from '../../shopping-list/store/shopping-list.actions';
+import { map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -13,7 +14,7 @@ import * as ShoppingListActions from '../../shopping-list/store/shopping-list.ac
   styleUrls: ['./recipe-detail.component.css']
 })
 export class RecipeDetailComponent implements OnInit {
-  private _id: number;
+  private id: number;
   public recipe: Recipe;
 
   constructor(
@@ -24,14 +25,17 @@ export class RecipeDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => {
-      this._id = +params.id;
-      this.recipe = this.recipesService.getRecipe(this._id);
-    });
-  }
-
-  get recipeId(): number {
-    return this._id;
+    this.route.params.pipe(
+      map((params: Params) => +params.id),
+      switchMap(recipeId => {
+        this.id = recipeId;
+        return this.store.select('recipes');
+      }),
+      map(recipesState => {
+        return recipesState.recipes
+          .find((recipe, index) => index === this.id);
+      })
+    ).subscribe((recipe: Recipe) => this.recipe = recipe);
   }
 
   onAddToShoppingListClick(evt) {
@@ -43,7 +47,7 @@ export class RecipeDetailComponent implements OnInit {
 
   onDeleteClick(evt) {
     evt.preventDefault();
-    this.recipesService.deleteRecipe(this._id);
+    this.recipesService.deleteRecipe(this.id);
     this.router.navigate(['../'], { relativeTo: this.route });
   }
 }
