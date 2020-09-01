@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import {
   AbstractControl,
@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { map } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 
 import { Ingredient } from '../../shared/ingredient.model';
 import { Recipe } from '../recipe.model';
@@ -19,10 +20,11 @@ import * as RecipesActions from '../store/recipes.actions';
   templateUrl: './recipe-edit.component.html',
   styleUrls: ['./recipe-edit.component.css']
 })
-export class RecipeEditComponent implements OnInit {
+export class RecipeEditComponent implements OnInit, OnDestroy {
   private _id: number;
   private _isEdit = false;
   private _ingredientControls: FormArray;
+  private store$: Subscription;
   public recipeForm: FormGroup;
 
   constructor(
@@ -39,6 +41,10 @@ export class RecipeEditComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(): void {
+    this.store$.unsubscribe();
+  }
+
   private _initRecipeForm(): void {
     let name = '';
     let image = '';
@@ -47,7 +53,7 @@ export class RecipeEditComponent implements OnInit {
     this._ingredientControls = new FormArray([]);
 
     if (this._isEdit) {
-      this.store.select('recipes').pipe(
+      this.store$ = this.store.select('recipes').pipe(
         map(recipesState => {
           return recipesState.recipes.find((recipe, index) => {
             return index === this._id;

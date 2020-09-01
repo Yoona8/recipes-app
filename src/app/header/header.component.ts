@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 
@@ -13,7 +13,7 @@ import * as RecipesActions from '../recipes/store/recipes.actions';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   private user$: Subscription;
   public isAuthenticated: boolean;
 
@@ -29,6 +29,10 @@ export class HeaderComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(): void {
+    this.user$.unsubscribe();
+  }
+
   onSaveDataClick(evt): void {
     evt.preventDefault();
     this.dataStorageService.saveRecipes();
@@ -36,7 +40,6 @@ export class HeaderComponent implements OnInit {
 
   onFetchDataClick(evt): void {
     evt.preventDefault();
-    // this.dataStorageService.getRecipes().subscribe();
     this.store.dispatch(new RecipesActions.GetRecipes());
   }
 
