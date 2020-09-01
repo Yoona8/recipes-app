@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { SharedModule } from './shared/shared.module';
 import { AuthEffects } from './auth/store/auth.effects';
+import { RecipesEffects } from './recipes/store/recipes.effects';
 import * as fromApp from './store/app.reducer';
 
 @NgModule({
@@ -22,7 +23,7 @@ import * as fromApp from './store/app.reducer';
     HttpClientModule,
     AppRoutingModule,
     StoreModule.forRoot(fromApp.appReducerMap),
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([AuthEffects, RecipesEffects]),
     SharedModule
   ],
   providers: [{

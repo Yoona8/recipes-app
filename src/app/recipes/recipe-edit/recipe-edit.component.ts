@@ -6,9 +6,13 @@ import {
   FormControl,
   FormGroup, Validators
 } from '@angular/forms';
+import { Store } from '@ngrx/store';
+
 import { RecipesService } from '../recipes.service';
 import { Ingredient } from '../../shared/ingredient.model';
 import { Recipe } from '../recipe.model';
+import * as fromApp from '../../store/app.reducer';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -24,7 +28,8 @@ export class RecipeEditComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private recipesService: RecipesService
+    private recipesService: RecipesService,
+    private store: Store<fromApp.AppState>
   ) { }
 
   ngOnInit(): void {
@@ -43,16 +48,23 @@ export class RecipeEditComponent implements OnInit {
     this._ingredientControls = new FormArray([]);
 
     if (this._isEdit) {
-      const recipe = this.recipesService.getRecipe(this._id);
-      name = recipe.name;
-      image = recipe.image;
-      description = recipe.description;
+      this.store.select('recipes').pipe(
+        map(recipesState => {
+          return recipesState.recipes.find((recipe, index) => {
+            return index === this._id;
+          });
+        })
+      ).subscribe(recipe => {
+        name = recipe.name;
+        image = recipe.image;
+        description = recipe.description;
 
-      if (recipe.ingredients) {
-        recipe.ingredients.forEach((ingredient: Ingredient) => {
-          this._addIngredientControl(ingredient);
-        });
-      }
+        if (recipe.ingredients) {
+          recipe.ingredients.forEach((ingredient: Ingredient) => {
+            this._addIngredientControl(ingredient);
+          });
+        }
+      });
     }
 
     this.recipeForm = new FormGroup({
