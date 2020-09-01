@@ -9,7 +9,6 @@ import {
 import { map } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
-import { RecipesService } from '../recipes.service';
 import { Ingredient } from '../../shared/ingredient.model';
 import { Recipe } from '../recipe.model';
 import * as fromApp from '../../store/app.reducer';
@@ -29,7 +28,6 @@ export class RecipeEditComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private recipesService: RecipesService,
     private store: Store<fromApp.AppState>
   ) { }
 

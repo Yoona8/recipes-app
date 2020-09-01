@@ -10,14 +10,12 @@ import { map, switchMap, take } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import { Recipe } from './recipe.model';
-import { RecipesService } from './recipes.service';
 import * as fromApp from '../store/app.reducer';
 import * as RecipesActions from './store/recipes.actions';
 
 @Injectable({providedIn: 'root'})
 export class RecipesResolverService implements Resolve<Recipe[]> {
   constructor(
-    private recipesService: RecipesService,
     private store: Store<fromApp.AppState>,
     private actions$: Actions
   ) {}

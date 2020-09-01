@@ -37,6 +37,13 @@ export function recipesReducer(
         ...state,
         recipes: updatedRecipes
       };
+    case RecipesActions.DELETE_RECIPE:
+      return {
+        ...state,
+        recipes: state.recipes.filter((recipe, index) => {
+          return index !== action.payload;
+        })
+      };
     default:
       return state;
   }
