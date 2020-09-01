@@ -116,9 +116,11 @@ export class RecipeEditComponent implements OnInit {
     };
 
     if (this._isEdit) {
-      this.recipesService.updateRecipe(this._id, recipe);
+      this.store.dispatch(new RecipesActions.UpdateRecipe({
+        index: this._id,
+        recipe
+      }));
     } else {
-      // this.recipesService.addRecipe(recipe);
       this.store.dispatch(new RecipesActions.AddRecipe(recipe));
     }
 
