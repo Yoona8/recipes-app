@@ -5,14 +5,6 @@ import { Recipe } from './recipe.model';
 export class RecipesService {
   private _recipes: Recipe[] = [];
 
-  get recipes(): Recipe[] {
-    return this._recipes.slice();
-  }
-
-  setRecipes(recipes: Recipe[]) {
-    this._recipes = recipes;
-  }
-
   addRecipe(recipe: Recipe) {
     this._recipes.push(recipe);
   }

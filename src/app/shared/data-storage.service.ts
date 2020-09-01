@@ -12,8 +12,8 @@ export class DataStorageService {
   ) {}
 
   saveRecipes(): void {
-    const recipes = this.recipesService.recipes;
-    this.http.put(environment.urlRecipes, recipes)
-      .subscribe(response => console.log(response));
+    // const recipes = this.recipesService.recipes;
+    // this.http.put(environment.urlRecipes, recipes)
+    //   .subscribe(response => console.log(response));
   }
 }

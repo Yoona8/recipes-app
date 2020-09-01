@@ -6,13 +6,14 @@ import {
   FormControl,
   FormGroup, Validators
 } from '@angular/forms';
+import { map } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
 import { RecipesService } from '../recipes.service';
 import { Ingredient } from '../../shared/ingredient.model';
 import { Recipe } from '../recipe.model';
 import * as fromApp from '../../store/app.reducer';
-import { map } from 'rxjs/operators';
+import * as RecipesActions from '../store/recipes.actions';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -117,7 +118,8 @@ export class RecipeEditComponent implements OnInit {
     if (this._isEdit) {
       this.recipesService.updateRecipe(this._id, recipe);
     } else {
-      this.recipesService.addRecipe(recipe);
+      // this.recipesService.addRecipe(recipe);
+      this.store.dispatch(new RecipesActions.AddRecipe(recipe));
     }
 
     this.router.navigate(['../'], { relativeTo: this.route });
