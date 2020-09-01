@@ -42,7 +42,9 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.store$.unsubscribe();
+    if (this.store$) {
+      this.store$.unsubscribe();
+    }
   }
 
   private _initRecipeForm(): void {
